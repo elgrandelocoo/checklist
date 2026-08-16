@@ -22,6 +22,16 @@ content="default">
 <meta name="apple-mobile-web-app-title"
 content="To-Do List">
 
+<link rel="icon"
+      type="image/png"
+      href="favicon.png">
+
+<link rel="apple-touch-icon"
+      href="apple-touch-icon.png">
+
+<link rel="manifest"
+      href="manifest.json">
+
 <title>To-Do List</title>
 
 
@@ -43,6 +53,7 @@ html {
     background: #f8f5fb;
 }
 
+
 body {
 
     margin: 0;
@@ -59,7 +70,7 @@ body {
             #eef5f4 100%
         );
 
-    color: #45424a;
+    color: #514c58;
 
     font-family:
         -apple-system,
@@ -214,10 +225,6 @@ body {
         rgba(120,110,130,0.20);
 }
 
-
-/*
-   Individual pastel accents
-*/
 
 .category:nth-child(1).selected {
 
@@ -570,7 +577,6 @@ body {
             translateY(0);
 
     }
-
 }
 
 
@@ -843,7 +849,9 @@ body {
 
 
 <div class="category-hint">
+
     Tap the selected category again to rename it
+
 </div>
 
 
@@ -1088,12 +1096,15 @@ function renderCategories() {
                 </div>
 
                 <div class="category-count">
+
                     ${category.tasks.length}
+
                     ${
                         category.tasks.length === 1
                         ? "task"
                         : "tasks"
                     }
+
                 </div>
 
             `;
@@ -1389,13 +1400,18 @@ function renderTasks() {
 
                     <span
                         class="checkmark">
+
                         ✓
+
                     </span>
 
                 </button>
 
+
                 <div class="task-text">
+
                     ${escapeHtml(task.text)}
+
                 </div>
 
             `;
@@ -1466,7 +1482,9 @@ function renderTasks() {
    COUNTER
 ========================================= */
 
-function updateCounter(count) {
+function updateCounter(
+    count
+) {
 
     const counter =
         document.getElementById(
@@ -1567,7 +1585,7 @@ document.getElementById(
 
 
 /* =========================================
-   INITIALIZE
+   START
 ========================================= */
 
 loadData();
