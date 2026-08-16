@@ -20,9 +20,9 @@ viewport-fit=cover">
 content="black-translucent">
 
 <meta name="apple-mobile-web-app-title"
-content="Daily">
+content="Vanessa's To-Do List">
 
-<title>Daily</title>
+<title>Vanessa's To-Do List</title>
 
 
 <style>
@@ -43,6 +43,7 @@ html {
     background: #09090d;
 }
 
+
 body {
 
     margin: 0;
@@ -54,8 +55,8 @@ body {
     background:
         radial-gradient(
             circle at 50% -10%,
-            #30384d 0%,
-            #191d2a 30%,
+            #3d344d 0%,
+            #211d2d 30%,
             #111118 65%,
             #07070a 100%
         );
@@ -80,6 +81,7 @@ body {
 .app {
 
     width: 100%;
+
     min-height: 100dvh;
 
     display: flex;
@@ -89,10 +91,10 @@ body {
     align-items: flex-start;
 
     padding:
-        calc(env(safe-area-inset-top) + 35px)
-        20px
-        calc(env(safe-area-inset-bottom) + 25px)
-        20px;
+        calc(env(safe-area-inset-top) + 30px)
+        18px
+        calc(env(safe-area-inset-bottom) + 20px)
+        18px;
 }
 
 
@@ -100,7 +102,7 @@ body {
 
     width: 100%;
 
-    max-width: 520px;
+    max-width: 540px;
 }
 
 
@@ -112,7 +114,7 @@ body {
 
     text-align: center;
 
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 
@@ -130,24 +132,203 @@ body {
 
     margin: 0;
 
-    font-size: 34px;
+    font-size: 32px;
 
     font-weight: 700;
 
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 
-.date {
+.subtitle {
 
     margin-top: 7px;
 
-    font-size: 13px;
+    font-size: 12px;
 
     color:
-        rgba(255,255,255,0.42);
+        rgba(255,255,255,0.38);
 
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================
+   CATEGORY BAR
+========================================= */
+
+.category-bar {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 7px;
+
+    margin-bottom: 15px;
+}
+
+
+.category {
+
+    min-width: 0;
+
+    padding:
+        13px
+        7px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    background:
+        rgba(255,255,255,0.045);
+
+    color:
+        rgba(255,255,255,0.48);
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.category.selected {
+
+    background:
+        rgba(255,255,255,0.13);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.28);
+
+    color: white;
+}
+
+
+.category:active {
+
+    transform:
+        scale(0.96);
+}
+
+
+.category-name {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.category-count {
+
+    margin-top: 4px;
+
+    font-size: 9px;
+
+    color:
+        rgba(255,255,255,0.30);
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   CATEGORY EDIT
+========================================= */
+
+.category-editor {
+
+    display: none;
+
+    margin-bottom: 12px;
+
+    gap: 7px;
+}
+
+
+.category-editor.visible {
+
+    display: flex;
+}
+
+
+.category-input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding:
+        12px
+        13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+
+.category-save {
+
+    padding:
+        0
+        15px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: white;
+
+    color: #111;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   CATEGORY HINT
+========================================= */
+
+.category-hint {
+
+    text-align: center;
+
+    margin-bottom: 13px;
+
+    font-size: 10px;
+
+    color:
+        rgba(255,255,255,0.22);
 }
 
 
@@ -161,7 +342,7 @@ body {
 
     gap: 9px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 
@@ -172,7 +353,7 @@ body {
     min-width: 0;
 
     padding:
-        16px
+        15px
         15px;
 
     border:
@@ -228,12 +409,7 @@ body {
 
     font-size: 27px;
 
-    font-weight: 400;
-
     cursor: pointer;
-
-    transition:
-        transform 0.15s ease;
 }
 
 
@@ -241,6 +417,25 @@ body {
 
     transform:
         scale(0.93);
+}
+
+
+/* =========================================
+   CURRENT CATEGORY TITLE
+========================================= */
+
+.current-category {
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+
+    color:
+        rgba(255,255,255,0.32);
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
 }
 
 
@@ -254,11 +449,11 @@ body {
 
     flex-direction: column;
 
-    gap: 9px;
+    gap: 8px;
 
     max-height:
         calc(
-            100dvh - 230px
+            100dvh - 290px
         );
 
     overflow-y: auto;
@@ -270,6 +465,7 @@ body {
 
 
 .task-list::-webkit-scrollbar {
+
     display: none;
 }
 
@@ -392,10 +588,6 @@ body {
 }
 
 
-/* =========================================
-   TASK TEXT
-========================================= */
-
 .task-text {
 
     flex: 1;
@@ -411,7 +603,7 @@ body {
 
 
 /* =========================================
-   EMPTY STATE
+   EMPTY
 ========================================= */
 
 .empty {
@@ -419,7 +611,7 @@ body {
     text-align: center;
 
     padding:
-        55px
+        50px
         20px;
 
     color:
@@ -429,7 +621,7 @@ body {
 
 .empty-icon {
 
-    font-size: 40px;
+    font-size: 38px;
 
     margin-bottom: 12px;
 }
@@ -453,21 +645,21 @@ body {
 
 
 /* =========================================
-   TASK COUNTER
+   COUNTER
 ========================================= */
 
 .counter {
 
     text-align: center;
 
-    margin-top: 15px;
+    margin-top: 12px;
 
-    font-size: 11px;
+    font-size: 10px;
 
     letter-spacing: 1.5px;
 
     color:
-        rgba(255,255,255,0.25);
+        rgba(255,255,255,0.23);
 
     text-transform: uppercase;
 }
@@ -480,7 +672,11 @@ body {
 @media (max-width: 370px) {
 
     .title {
-        font-size: 30px;
+        font-size: 29px;
+    }
+
+    .category-name {
+        font-size: 12px;
     }
 
     .task-input {
@@ -511,7 +707,7 @@ body {
 
         max-height:
             calc(
-                100dvh - 180px
+                100dvh - 240px
             );
     }
 
@@ -544,16 +740,69 @@ body {
 
 
     <h1 class="title">
-        Daily
+        Vanessa's To-Do List
     </h1>
 
 
-    <div
-        class="date"
-        id="date">
+    <div class="subtitle">
+        Keep it simple. Get it done.
     </div>
 
 
+</div>
+
+
+<!-- ======================================
+     CATEGORIES
+======================================= -->
+
+<div
+    class="category-bar"
+    id="categoryBar">
+</div>
+
+
+<!-- ======================================
+     CATEGORY EDITOR
+======================================= -->
+
+<div
+    class="category-editor"
+    id="categoryEditor">
+
+
+    <input
+        class="category-input"
+        id="categoryInput"
+        type="text"
+        maxlength="30"
+        autocomplete="off">
+
+
+    <button
+        class="category-save"
+        onclick="saveCategoryName()">
+
+        Save
+
+    </button>
+
+
+</div>
+
+
+<div class="category-hint">
+    Tap the selected category name to rename it
+</div>
+
+
+<!-- ======================================
+     CURRENT CATEGORY
+======================================= -->
+
+<div
+    class="current-category"
+    id="currentCategory">
 </div>
 
 
@@ -619,44 +868,47 @@ body {
 ========================================= */
 
 const STORAGE_KEY =
-    "dailyChecklist";
+    "vanessaTodoList_v2";
 
 
 /* =========================================
-   GET TODAY'S DATE KEY
+   DEFAULT DATA
 ========================================= */
 
-function getTodayKey() {
+const defaultData = {
 
-    const today =
-        new Date();
+    categories: [
+
+        {
+            name: "To-do 1",
+            tasks: []
+        },
+
+        {
+            name: "To-do 2",
+            tasks: []
+        },
+
+        {
+            name: "To-do 3",
+            tasks: []
+        }
+
+    ]
+
+};
 
 
-    return (
+let data;
 
-        today.getFullYear()
-        +
-        "-"
-        +
-        String(
-            today.getMonth() + 1
-        ).padStart(2, "0")
-        +
-        "-"
-        +
-        String(
-            today.getDate()
-        ).padStart(2, "0")
-
-    );
-}
+let selectedCategory = 0;
 
 
 /* =========================================
    LOAD DATA
 ========================================= */
 
-function loadTasks() {
+function loadData() {
 
     const saved =
         localStorage.getItem(
@@ -666,37 +918,58 @@ function loadTasks() {
 
     if (!saved) {
 
-        return [];
+        data =
+            JSON.parse(
+                JSON.stringify(
+                    defaultData
+                )
+            );
+
+        saveData();
+
+        return;
 
     }
 
 
     try {
 
-        const data =
+        data =
             JSON.parse(saved);
 
 
         /*
-         * Only keep today's tasks.
+         * Safety check.
          */
 
         if (
-            data.date !==
-            getTodayKey()
+            !data.categories
+            ||
+            data.categories.length !== 3
         ) {
 
-            return [];
+            data =
+                JSON.parse(
+                    JSON.stringify(
+                        defaultData
+                    )
+                );
+
+            saveData();
 
         }
 
 
-        return data.tasks || [];
-
-
     } catch {
 
-        return [];
+        data =
+            JSON.parse(
+                JSON.stringify(
+                    defaultData
+                )
+            );
+
+        saveData();
 
     }
 
@@ -707,23 +980,206 @@ function loadTasks() {
    SAVE DATA
 ========================================= */
 
-function saveTasks(tasks) {
+function saveData() {
 
     localStorage.setItem(
 
         STORAGE_KEY,
 
-        JSON.stringify({
-
-            date:
-                getTodayKey(),
-
-            tasks:
-                tasks
-
-        })
+        JSON.stringify(data)
 
     );
+
+}
+
+
+/* =========================================
+   RENDER CATEGORIES
+========================================= */
+
+function renderCategories() {
+
+    const bar =
+        document.getElementById(
+            "categoryBar"
+        );
+
+
+    bar.innerHTML = "";
+
+
+    data.categories.forEach(
+        (category, index) => {
+
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "category";
+
+
+            if (
+                index ===
+                selectedCategory
+            ) {
+
+                element.classList.add(
+                    "selected"
+                );
+
+            }
+
+
+            element.innerHTML = `
+
+                <div class="category-name">
+                    ${escapeHtml(category.name)}
+                </div>
+
+                <div class="category-count">
+                    ${category.tasks.length}
+                    ${
+                        category.tasks.length === 1
+                        ? "task"
+                        : "tasks"
+                    }
+                </div>
+
+            `;
+
+
+            element.onclick =
+                function() {
+
+
+                    /*
+                     * If the selected category
+                     * is tapped again,
+                     * open rename mode.
+                     */
+
+                    if (
+                        index ===
+                        selectedCategory
+                    ) {
+
+                        openCategoryEditor();
+
+                        return;
+
+                    }
+
+
+                    selectedCategory =
+                        index;
+
+
+                    closeCategoryEditor();
+
+                    renderCategories();
+
+                    renderTasks();
+
+                };
+
+
+            bar.appendChild(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   RENAME CATEGORY
+========================================= */
+
+function openCategoryEditor() {
+
+    const editor =
+        document.getElementById(
+            "categoryEditor"
+        );
+
+
+    const input =
+        document.getElementById(
+            "categoryInput"
+        );
+
+
+    input.value =
+        data.categories[
+            selectedCategory
+        ].name;
+
+
+    editor.classList.add(
+        "visible"
+    );
+
+
+    input.focus();
+
+    input.select();
+
+}
+
+
+function closeCategoryEditor() {
+
+    document.getElementById(
+        "categoryEditor"
+    ).classList.remove(
+        "visible"
+    );
+
+}
+
+
+/* =========================================
+   SAVE CATEGORY NAME
+========================================= */
+
+function saveCategoryName() {
+
+    const input =
+        document.getElementById(
+            "categoryInput"
+        );
+
+
+    const name =
+        input.value.trim();
+
+
+    if (!name) {
+
+        return;
+
+    }
+
+
+    data.categories[
+        selectedCategory
+    ].name =
+        name;
+
+
+    saveData();
+
+    closeCategoryEditor();
+
+    renderCategories();
+
+    renderTasks();
 
 }
 
@@ -744,10 +1200,6 @@ function addTask() {
         input.value.trim();
 
 
-    /*
-     * Don't add empty tasks.
-     */
-
     if (!text) {
 
         input.focus();
@@ -757,11 +1209,9 @@ function addTask() {
     }
 
 
-    const tasks =
-        loadTasks();
-
-
-    tasks.push({
+    data.categories[
+        selectedCategory
+    ].tasks.push({
 
         id:
             Date.now(),
@@ -772,7 +1222,7 @@ function addTask() {
     });
 
 
-    saveTasks(tasks);
+    saveData();
 
 
     input.value = "";
@@ -780,6 +1230,8 @@ function addTask() {
 
     input.focus();
 
+
+    renderCategories();
 
     renderTasks();
 
@@ -792,21 +1244,23 @@ function addTask() {
 
 function completeTask(id) {
 
-    const tasks =
-        loadTasks();
+    const category =
+        data.categories[
+            selectedCategory
+        ];
 
 
-    const remaining =
-        tasks.filter(
+    category.tasks =
+        category.tasks.filter(
             task =>
                 task.id !== id
         );
 
 
-    saveTasks(
-        remaining
-    );
+    saveData();
 
+
+    renderCategories();
 
     renderTasks();
 
@@ -814,7 +1268,7 @@ function completeTask(id) {
 
 
 /* =========================================
-   RENDER
+   RENDER TASKS
 ========================================= */
 
 function renderTasks() {
@@ -825,15 +1279,24 @@ function renderTasks() {
         );
 
 
-    const tasks =
-        loadTasks();
+    const category =
+        data.categories[
+            selectedCategory
+        ];
 
 
     container.innerHTML = "";
 
 
+    document.getElementById(
+        "currentCategory"
+    ).textContent =
+
+        category.name;
+
+
     if (
-        tasks.length === 0
+        category.tasks.length === 0
     ) {
 
         container.innerHTML = `
@@ -845,7 +1308,7 @@ function renderTasks() {
                 </div>
 
                 <div class="empty-title">
-                    Nothing for today
+                    Nothing here yet
                 </div>
 
                 <div class="empty-subtitle">
@@ -864,7 +1327,7 @@ function renderTasks() {
     }
 
 
-    tasks.forEach(
+    category.tasks.forEach(
         task => {
 
 
@@ -908,13 +1371,9 @@ function renderTasks() {
                 function() {
 
 
-                    /*
-                     * Small visual feedback
-                     * before removing.
-                     */
-
                     checkbox.style.background =
                         "rgba(255,255,255,0.95)";
+
 
                     checkbox.style.borderColor =
                         "rgba(255,255,255,0.95)";
@@ -928,6 +1387,7 @@ function renderTasks() {
 
                     checkmark.style.opacity =
                         "1";
+
 
                     checkmark.style.transform =
                         "scale(1)";
@@ -956,7 +1416,7 @@ function renderTasks() {
 
 
     updateCounter(
-        tasks.length
+        category.tasks.length
     );
 
 }
@@ -966,9 +1426,7 @@ function renderTasks() {
    COUNTER
 ========================================= */
 
-function updateCounter(
-    count
-) {
+function updateCounter(count) {
 
     const counter =
         document.getElementById(
@@ -1023,33 +1481,7 @@ function escapeHtml(text) {
 
 
 /* =========================================
-   DATE
-========================================= */
-
-function updateDate() {
-
-    const today =
-        new Date();
-
-
-    document.getElementById(
-        "date"
-    ).textContent =
-
-        today.toLocaleDateString(
-            undefined,
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long"
-            }
-        );
-
-}
-
-
-/* =========================================
-   ENTER KEY
+   ENTER KEY — TASK
 ========================================= */
 
 document.getElementById(
@@ -1072,44 +1504,35 @@ document.getElementById(
 
 
 /* =========================================
-   MIDNIGHT CHECK
+   ENTER KEY — CATEGORY NAME
 ========================================= */
 
-let currentDate =
-    getTodayKey();
-
-
-setInterval(
-    function() {
-
-        const newDate =
-            getTodayKey();
-
+document.getElementById(
+    "categoryInput"
+).addEventListener(
+    "keydown",
+    function(event) {
 
         if (
-            newDate !==
-            currentDate
+            event.key ===
+            "Enter"
         ) {
 
-            currentDate =
-                newDate;
-
-            updateDate();
-
-            renderTasks();
+            saveCategoryName();
 
         }
 
-    },
-    10000
+    }
 );
 
 
 /* =========================================
-   START APP
+   INITIALIZE
 ========================================= */
 
-updateDate();
+loadData();
+
+renderCategories();
 
 renderTasks();
 
