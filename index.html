@@ -12,17 +12,17 @@ maximum-scale=1.0,
 user-scalable=no,
 viewport-fit=cover">
 
-<meta name="theme-color" content="#09090d">
+<meta name="theme-color" content="#f8f5fb">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <meta name="apple-mobile-web-app-status-bar-style"
-content="black-translucent">
+content="default">
 
 <meta name="apple-mobile-web-app-title"
-content="Vanessa's To-Do List">
+content="To-Do List">
 
-<title>Vanessa's To-Do List</title>
+<title>To-Do List</title>
 
 
 <style>
@@ -40,9 +40,8 @@ html {
     width: 100%;
     height: 100%;
 
-    background: #09090d;
+    background: #f8f5fb;
 }
-
 
 body {
 
@@ -53,15 +52,14 @@ body {
     min-height: 100%;
 
     background:
-        radial-gradient(
-            circle at 50% -10%,
-            #3d344d 0%,
-            #211d2d 30%,
-            #111118 65%,
-            #07070a 100%
+        linear-gradient(
+            145deg,
+            #fdf9fc 0%,
+            #f4f0fa 45%,
+            #eef5f4 100%
         );
 
-    color: white;
+    color: #45424a;
 
     font-family:
         -apple-system,
@@ -132,11 +130,13 @@ body {
 
     margin: 0;
 
-    font-size: 32px;
+    font-size: 34px;
 
-    font-weight: 700;
+    font-weight: 750;
 
-    letter-spacing: 0.5px;
+    letter-spacing: -0.5px;
+
+    color: #514c58;
 }
 
 
@@ -146,8 +146,7 @@ body {
 
     font-size: 12px;
 
-    color:
-        rgba(255,255,255,0.38);
+    color: #9993a0;
 
     letter-spacing: 1.5px;
 }
@@ -164,9 +163,9 @@ body {
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 7px;
+    gap: 8px;
 
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
 
@@ -175,42 +174,66 @@ body {
     min-width: 0;
 
     padding:
-        13px
+        14px
         7px;
 
-    border-radius: 15px;
+    border-radius: 17px;
 
     border:
         1px solid
-        rgba(255,255,255,0.08);
+        rgba(120,110,130,0.10);
 
     background:
-        rgba(255,255,255,0.045);
+        rgba(255,255,255,0.72);
 
-    color:
-        rgba(255,255,255,0.48);
+    color: #9a95a0;
 
     text-align: center;
 
     cursor: pointer;
 
+    box-shadow:
+        0 5px 18px
+        rgba(100,90,110,0.06);
+
     transition:
-        background 0.15s ease,
-        border 0.15s ease,
-        transform 0.15s ease;
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 
 .category.selected {
 
-    background:
-        rgba(255,255,255,0.13);
+    color: #5e5865;
 
-    border:
-        1px solid
-        rgba(255,255,255,0.28);
+    box-shadow:
+        0 7px 22px
+        rgba(100,90,110,0.10);
 
-    color: white;
+    border-color:
+        rgba(120,110,130,0.20);
+}
+
+
+/*
+   Individual pastel accents
+*/
+
+.category:nth-child(1).selected {
+
+    background: #eee5fa;
+}
+
+
+.category:nth-child(2).selected {
+
+    background: #e4f1f8;
+}
+
+
+.category:nth-child(3).selected {
+
+    background: #e4f4ed;
 }
 
 
@@ -225,7 +248,7 @@ body {
 
     font-size: 13px;
 
-    font-weight: 600;
+    font-weight: 650;
 
     white-space: nowrap;
 
@@ -237,19 +260,18 @@ body {
 
 .category-count {
 
-    margin-top: 4px;
+    margin-top: 5px;
 
     font-size: 9px;
 
-    color:
-        rgba(255,255,255,0.30);
+    color: #aaa5af;
 
     letter-spacing: 0.5px;
 }
 
 
 /* =========================================
-   CATEGORY EDIT
+   CATEGORY EDITOR
 ========================================= */
 
 .category-editor {
@@ -280,20 +302,31 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,0.12);
+        #ddd6e3;
 
     border-radius: 14px;
 
     outline: none;
 
     background:
-        rgba(255,255,255,0.07);
+        rgba(255,255,255,0.85);
 
-    color: white;
+    color: #57515e;
 
     font-family: inherit;
 
     font-size: 14px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(100,90,110,0.05);
+}
+
+
+.category-input:focus {
+
+    border-color:
+        #cbbbdc;
 }
 
 
@@ -301,17 +334,26 @@ body {
 
     padding:
         0
-        15px;
+        16px;
 
     border: none;
 
     border-radius: 14px;
 
-    background: white;
+    background: #ddd0ed;
 
-    color: #111;
+    color: #51485c;
 
-    font-weight: 600;
+    font-weight: 650;
+
+    font-family: inherit;
+}
+
+
+.category-save:active {
+
+    transform:
+        scale(0.96);
 }
 
 
@@ -327,8 +369,25 @@ body {
 
     font-size: 10px;
 
-    color:
-        rgba(255,255,255,0.22);
+    color: #aaa4ae;
+}
+
+
+/* =========================================
+   CURRENT CATEGORY
+========================================= */
+
+.current-category {
+
+    margin-bottom: 9px;
+
+    font-size: 11px;
+
+    color: #aaa3af;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
 }
 
 
@@ -358,40 +417,40 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,0.10);
+        #e1dbe5;
 
     border-radius: 17px;
 
     outline: none;
 
     background:
-        rgba(255,255,255,0.07);
+        rgba(255,255,255,0.78);
 
-    color: white;
+    color: #514d55;
 
     font-family: inherit;
 
     font-size: 16px;
 
-    backdrop-filter:
-        blur(15px);
-
-    -webkit-backdrop-filter:
-        blur(15px);
+    box-shadow:
+        0 6px 22px
+        rgba(100,90,110,0.06);
 }
 
 
 .task-input::placeholder {
 
-    color:
-        rgba(255,255,255,0.32);
+    color: #b7b1ba;
 }
 
 
 .task-input:focus {
 
     border-color:
-        rgba(255,255,255,0.25);
+        #cfc1d8;
+
+    background:
+        rgba(255,255,255,0.92);
 }
 
 
@@ -403,13 +462,20 @@ body {
 
     border-radius: 17px;
 
-    background: white;
+    background: #d9c7e8;
 
-    color: #111;
+    color: #564a60;
 
     font-size: 27px;
 
     cursor: pointer;
+
+    box-shadow:
+        0 6px 18px
+        rgba(120,100,130,0.12);
+
+    transition:
+        transform 0.15s ease;
 }
 
 
@@ -417,25 +483,6 @@ body {
 
     transform:
         scale(0.93);
-}
-
-
-/* =========================================
-   CURRENT CATEGORY TITLE
-========================================= */
-
-.current-category {
-
-    margin-bottom: 10px;
-
-    font-size: 12px;
-
-    color:
-        rgba(255,255,255,0.32);
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
 }
 
 
@@ -449,7 +496,7 @@ body {
 
     flex-direction: column;
 
-    gap: 8px;
+    gap: 9px;
 
     max-height:
         calc(
@@ -489,19 +536,15 @@ body {
     border-radius: 18px;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.075),
-            rgba(255,255,255,0.035)
-        );
+        rgba(255,255,255,0.76);
 
     border:
         1px solid
-        rgba(255,255,255,0.075);
+        rgba(150,140,155,0.10);
 
     box-shadow:
-        0 10px 30px
-        rgba(0,0,0,0.15);
+        0 7px 22px
+        rgba(100,90,110,0.06);
 
     animation:
         taskAppear 0.2s ease;
@@ -527,6 +570,7 @@ body {
             translateY(0);
 
     }
+
 }
 
 
@@ -536,9 +580,9 @@ body {
 
 .checkbox {
 
-    width: 25px;
+    width: 26px;
 
-    height: 25px;
+    height: 26px;
 
     flex-shrink: 0;
 
@@ -546,10 +590,10 @@ body {
 
     border:
         2px solid
-        rgba(255,255,255,0.35);
+        #c9bed1;
 
     background:
-        transparent;
+        #faf7fc;
 
     cursor: pointer;
 
@@ -577,6 +621,8 @@ body {
 
     font-size: 15px;
 
+    color: #65566e;
+
     opacity: 0;
 
     transform:
@@ -588,6 +634,10 @@ body {
 }
 
 
+/* =========================================
+   TASK TEXT
+========================================= */
+
 .task-text {
 
     flex: 1;
@@ -596,14 +646,16 @@ body {
 
     font-size: 16px;
 
-    line-height: 1.35;
+    line-height: 1.4;
+
+    color: #56515a;
 
     word-break: break-word;
 }
 
 
 /* =========================================
-   EMPTY
+   EMPTY STATE
 ========================================= */
 
 .empty {
@@ -614,14 +666,13 @@ body {
         50px
         20px;
 
-    color:
-        rgba(255,255,255,0.30);
+    color: #aaa4ae;
 }
 
 
 .empty-icon {
 
-    font-size: 38px;
+    font-size: 40px;
 
     margin-bottom: 12px;
 }
@@ -631,8 +682,7 @@ body {
 
     font-size: 16px;
 
-    color:
-        rgba(255,255,255,0.45);
+    color: #96909a;
 }
 
 
@@ -641,6 +691,8 @@ body {
     margin-top: 5px;
 
     font-size: 12px;
+
+    color: #b0aab3;
 }
 
 
@@ -658,8 +710,7 @@ body {
 
     letter-spacing: 1.5px;
 
-    color:
-        rgba(255,255,255,0.23);
+    color: #aaa4ae;
 
     text-transform: uppercase;
 }
@@ -672,7 +723,7 @@ body {
 @media (max-width: 370px) {
 
     .title {
-        font-size: 29px;
+        font-size: 30px;
     }
 
     .category-name {
@@ -735,12 +786,12 @@ body {
 
 
     <div class="icon">
-        ✅
+        🌸
     </div>
 
 
     <h1 class="title">
-        Vanessa's To-Do List
+        To-Do List
     </h1>
 
 
@@ -792,7 +843,7 @@ body {
 
 
 <div class="category-hint">
-    Tap the selected category name to rename it
+    Tap the selected category again to rename it
 </div>
 
 
@@ -938,10 +989,6 @@ function loadData() {
             JSON.parse(saved);
 
 
-        /*
-         * Safety check.
-         */
-
         if (
             !data.categories
             ||
@@ -1055,12 +1102,6 @@ function renderCategories() {
             element.onclick =
                 function() {
 
-
-                    /*
-                     * If the selected category
-                     * is tapped again,
-                     * open rename mode.
-                     */
 
                     if (
                         index ===
@@ -1291,7 +1332,6 @@ function renderTasks() {
     document.getElementById(
         "currentCategory"
     ).textContent =
-
         category.name;
 
 
@@ -1372,11 +1412,11 @@ function renderTasks() {
 
 
                     checkbox.style.background =
-                        "rgba(255,255,255,0.95)";
+                        "#dcefe5";
 
 
                     checkbox.style.borderColor =
-                        "rgba(255,255,255,0.95)";
+                        "#a9cfbb";
 
 
                     const checkmark =
@@ -1504,7 +1544,7 @@ document.getElementById(
 
 
 /* =========================================
-   ENTER KEY — CATEGORY NAME
+   ENTER KEY — CATEGORY
 ========================================= */
 
 document.getElementById(
