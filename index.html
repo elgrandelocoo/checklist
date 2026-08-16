@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no,
+viewport-fit=cover">
+
+<meta name="theme-color" content="#09090d">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style"
+content="black-translucent">
+
+<meta name="apple-mobile-web-app-title"
+content="Daily">
+
+<title>Daily</title>
+
+
+<style>
+
+/* =========================================
+   BASIC
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+
+    width: 100%;
+    height: 100%;
+
+    background: #09090d;
+}
+
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            #30384d 0%,
+            #191d2a 30%,
+            #111118 65%,
+            #07070a 100%
+        );
+
+    color: white;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Helvetica Neue",
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+
+    width: 100%;
+    min-height: 100dvh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding:
+        calc(env(safe-area-inset-top) + 35px)
+        20px
+        calc(env(safe-area-inset-bottom) + 25px)
+        20px;
+}
+
+
+.content {
+
+    width: 100%;
+
+    max-width: 520px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+.icon {
+
+    font-size: 42px;
+
+    line-height: 1;
+
+    margin-bottom: 12px;
+}
+
+
+.title {
+
+    margin: 0;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.date {
+
+    margin-top: 7px;
+
+    font-size: 13px;
+
+    color:
+        rgba(255,255,255,0.42);
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   ADD TASK
+========================================= */
+
+.add-card {
+
+    display: flex;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+}
+
+
+.task-input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding:
+        16px
+        15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    border-radius: 17px;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    backdrop-filter:
+        blur(15px);
+
+    -webkit-backdrop-filter:
+        blur(15px);
+}
+
+
+.task-input::placeholder {
+
+    color:
+        rgba(255,255,255,0.32);
+}
+
+
+.task-input:focus {
+
+    border-color:
+        rgba(255,255,255,0.25);
+}
+
+
+.add-button {
+
+    width: 54px;
+
+    border: none;
+
+    border-radius: 17px;
+
+    background: white;
+
+    color: #111;
+
+    font-size: 27px;
+
+    font-weight: 400;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease;
+}
+
+
+.add-button:active {
+
+    transform:
+        scale(0.93);
+}
+
+
+/* =========================================
+   TASK LIST
+========================================= */
+
+.task-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    max-height:
+        calc(
+            100dvh - 230px
+        );
+
+    overflow-y: auto;
+
+    padding-bottom: 20px;
+
+    scrollbar-width: none;
+}
+
+
+.task-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================================
+   TASK
+========================================= */
+
+.task {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        15px
+        16px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.075),
+            rgba(255,255,255,0.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.075);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.15);
+
+    animation:
+        taskAppear 0.2s ease;
+}
+
+
+@keyframes taskAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(5px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+}
+
+
+/* =========================================
+   CHECKBOX
+========================================= */
+
+.checkbox {
+
+    width: 25px;
+
+    height: 25px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(255,255,255,0.35);
+
+    background:
+        transparent;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transition:
+        background 0.15s ease,
+        border 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.checkbox:active {
+
+    transform:
+        scale(0.88);
+}
+
+
+.checkmark {
+
+    font-size: 15px;
+
+    opacity: 0;
+
+    transform:
+        scale(0.5);
+
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+/* =========================================
+   TASK TEXT
+========================================= */
+
+.task-text {
+
+    flex: 1;
+
+    min-width: 0;
+
+    font-size: 16px;
+
+    line-height: 1.35;
+
+    word-break: break-word;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty {
+
+    text-align: center;
+
+    padding:
+        55px
+        20px;
+
+    color:
+        rgba(255,255,255,0.30);
+}
+
+
+.empty-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 12px;
+}
+
+
+.empty-title {
+
+    font-size: 16px;
+
+    color:
+        rgba(255,255,255,0.45);
+}
+
+
+.empty-subtitle {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   TASK COUNTER
+========================================= */
+
+.counter {
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    color:
+        rgba(255,255,255,0.25);
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 370px) {
+
+    .title {
+        font-size: 30px;
+    }
+
+    .task-input {
+        font-size: 15px;
+    }
+
+    .task-text {
+        font-size: 15px;
+    }
+
+}
+
+
+/* =========================================
+   LANDSCAPE
+========================================= */
+
+@media (orientation: landscape) {
+
+    .app {
+
+        padding-top: 20px;
+
+        overflow-y: auto;
+    }
+
+    .task-list {
+
+        max-height:
+            calc(
+                100dvh - 180px
+            );
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<div class="content">
+
+
+<!-- ======================================
+     HEADER
+======================================= -->
+
+<div class="header">
+
+
+    <div class="icon">
+        ✅
+    </div>
+
+
+    <h1 class="title">
+        Daily
+    </h1>
+
+
+    <div
+        class="date"
+        id="date">
+    </div>
+
+
+</div>
+
+
+<!-- ======================================
+     ADD TASK
+======================================= -->
+
+<div class="add-card">
+
+
+    <input
+        class="task-input"
+        id="taskInput"
+        type="text"
+        placeholder="Add something..."
+        autocomplete="off"
+        maxlength="200">
+
+
+    <button
+        class="add-button"
+        onclick="addTask()">
+
+        +
+
+    </button>
+
+
+</div>
+
+
+<!-- ======================================
+     TASK LIST
+======================================= -->
+
+<div
+    class="task-list"
+    id="taskList">
+</div>
+
+
+<!-- ======================================
+     COUNTER
+======================================= -->
+
+<div
+    class="counter"
+    id="counter">
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   STORAGE
+========================================= */
+
+const STORAGE_KEY =
+    "dailyChecklist";
+
+
+/* =========================================
+   GET TODAY'S DATE KEY
+========================================= */
+
+function getTodayKey() {
+
+    const today =
+        new Date();
+
+
+    return (
+
+        today.getFullYear()
+        +
+        "-"
+        +
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0")
+        +
+        "-"
+        +
+        String(
+            today.getDate()
+        ).padStart(2, "0")
+
+    );
+}
+
+
+/* =========================================
+   LOAD DATA
+========================================= */
+
+function loadTasks() {
+
+    const saved =
+        localStorage.getItem(
+            STORAGE_KEY
+        );
+
+
+    if (!saved) {
+
+        return [];
+
+    }
+
+
+    try {
+
+        const data =
+            JSON.parse(saved);
+
+
+        /*
+         * Only keep today's tasks.
+         */
+
+        if (
+            data.date !==
+            getTodayKey()
+        ) {
+
+            return [];
+
+        }
+
+
+        return data.tasks || [];
+
+
+    } catch {
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================
+   SAVE DATA
+========================================= */
+
+function saveTasks(tasks) {
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify({
+
+            date:
+                getTodayKey(),
+
+            tasks:
+                tasks
+
+        })
+
+    );
+
+}
+
+
+/* =========================================
+   ADD TASK
+========================================= */
+
+function addTask() {
+
+    const input =
+        document.getElementById(
+            "taskInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    /*
+     * Don't add empty tasks.
+     */
+
+    if (!text) {
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    const tasks =
+        loadTasks();
+
+
+    tasks.push({
+
+        id:
+            Date.now(),
+
+        text:
+            text
+
+    });
+
+
+    saveTasks(tasks);
+
+
+    input.value = "";
+
+
+    input.focus();
+
+
+    renderTasks();
+
+}
+
+
+/* =========================================
+   COMPLETE TASK
+========================================= */
+
+function completeTask(id) {
+
+    const tasks =
+        loadTasks();
+
+
+    const remaining =
+        tasks.filter(
+            task =>
+                task.id !== id
+        );
+
+
+    saveTasks(
+        remaining
+    );
+
+
+    renderTasks();
+
+}
+
+
+/* =========================================
+   RENDER
+========================================= */
+
+function renderTasks() {
+
+    const container =
+        document.getElementById(
+            "taskList"
+        );
+
+
+    const tasks =
+        loadTasks();
+
+
+    container.innerHTML = "";
+
+
+    if (
+        tasks.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ✨
+                </div>
+
+                <div class="empty-title">
+                    Nothing for today
+                </div>
+
+                <div class="empty-subtitle">
+                    Add something you want to get done.
+                </div>
+
+            </div>
+
+        `;
+
+
+        updateCounter(0);
+
+        return;
+
+    }
+
+
+    tasks.forEach(
+        task => {
+
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "task";
+
+
+            element.innerHTML = `
+
+                <button
+                    class="checkbox"
+                    aria-label="Complete task">
+
+                    <span
+                        class="checkmark">
+                        ✓
+                    </span>
+
+                </button>
+
+                <div class="task-text">
+                    ${escapeHtml(task.text)}
+                </div>
+
+            `;
+
+
+            const checkbox =
+                element.querySelector(
+                    ".checkbox"
+                );
+
+
+            checkbox.onclick =
+                function() {
+
+
+                    /*
+                     * Small visual feedback
+                     * before removing.
+                     */
+
+                    checkbox.style.background =
+                        "rgba(255,255,255,0.95)";
+
+                    checkbox.style.borderColor =
+                        "rgba(255,255,255,0.95)";
+
+
+                    const checkmark =
+                        checkbox.querySelector(
+                            ".checkmark"
+                        );
+
+
+                    checkmark.style.opacity =
+                        "1";
+
+                    checkmark.style.transform =
+                        "scale(1)";
+
+
+                    setTimeout(
+                        function() {
+
+                            completeTask(
+                                task.id
+                            );
+
+                        },
+                        180
+                    );
+
+                };
+
+
+            container.appendChild(
+                element
+            );
+
+        }
+    );
+
+
+    updateCounter(
+        tasks.length
+    );
+
+}
+
+
+/* =========================================
+   COUNTER
+========================================= */
+
+function updateCounter(
+    count
+) {
+
+    const counter =
+        document.getElementById(
+            "counter"
+        );
+
+
+    if (
+        count === 0
+    ) {
+
+        counter.textContent =
+            "";
+
+        return;
+
+    }
+
+
+    counter.textContent =
+
+        count
+        +
+        (
+            count === 1
+            ? " task remaining"
+            : " tasks remaining"
+        );
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+function updateDate() {
+
+    const today =
+        new Date();
+
+
+    document.getElementById(
+        "date"
+    ).textContent =
+
+        today.toLocaleDateString(
+            undefined,
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long"
+            }
+        );
+
+}
+
+
+/* =========================================
+   ENTER KEY
+========================================= */
+
+document.getElementById(
+    "taskInput"
+).addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            addTask();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   MIDNIGHT CHECK
+========================================= */
+
+let currentDate =
+    getTodayKey();
+
+
+setInterval(
+    function() {
+
+        const newDate =
+            getTodayKey();
+
+
+        if (
+            newDate !==
+            currentDate
+        ) {
+
+            currentDate =
+                newDate;
+
+            updateDate();
+
+            renderTasks();
+
+        }
+
+    },
+    10000
+);
+
+
+/* =========================================
+   START APP
+========================================= */
+
+updateDate();
+
+renderTasks();
+
+</script>
+
+
+</body>
+
+</html>
